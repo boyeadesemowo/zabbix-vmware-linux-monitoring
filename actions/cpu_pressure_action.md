@@ -34,7 +34,8 @@
 
 \### Rationale
 
-Attempting safe, automated remediation before alerting humans
+Attempting safe, automated remediation before alerting humans reduces alert fatigue and improves operational efficiency.
 
-reduces alert fatigue and improves operational efficiency.
+> Note: Automated remediation is documented here but was not executed
+> during the demo walkthrough to avoid disruptive behavior.
 
