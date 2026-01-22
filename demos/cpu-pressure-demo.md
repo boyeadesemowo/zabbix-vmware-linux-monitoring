@@ -15,10 +15,10 @@ This demo exercises the following components:
 
 - **Linux Agent Monitoring**
   - Metric collection via Zabbix Agent
-  - CPU utilization and load averages
+  - CPU idle time and load averages
 
 - **Trigger Logic**
-  - Five-minute rolling average evaluation
+  - Two-minute rolling average evaluation of CPU idle time
   - Sustained-condition detection (not spike-based)
 
 - **Alerting**
@@ -32,52 +32,23 @@ This demo exercises the following components:
 
 ## Trigger Definition
 
-
 **Name:**  
-Linux: High CPU utilization (avg >80% for 5m)
-
+Linux: Sustained CPU Pressure Detected
 
 **Expression:**
 ```text
-avg(system.cpu.util[,system],5m) > 80
+avg(system.cpu.idle[,system],2m) < 30
 ```
-
-
-This trigger evaluates sustained system-level CPU utilization using a
-five-minute rolling window, ensuring alerts represent real performance
-pressure rather than transient bursts.
-
----
-
-## Demo Flow
-
-### 1. Baseline Verification
-- Zabbix Problems view shows no active CPU alerts
-- Confirms normal operating conditions before load is introduced
-
-### 2. Load Generation
-- Sustained CPU load is generated on the monitored Linux VM
-- Simulates a runaway process or production workload
-
-### 3. Detection
-- Zabbix continuously evaluates CPU utilization via the agent
-- Alert fires only after the five-minute average exceeds threshold
-
-### 4. Evidence
-- CPU utilization graph shows sustained elevation
-- Alert threshold crossing is visually confirmed
-
-### 5. Recovery
-- Load is terminated
-- CPU usage returns to normal
-- Alert automatically resolves without manual intervention
-
----
 
 ## Demo Video
 
 🎥 **Loom Walkthrough:**  
-(Add Loom link here)
+https://www.loom.com/share/6601992579414afabdd73c092df7f84a
 
-This video demonstrates how the monitoring architecture reacts to
-sustained CPU pressure in real time.
+This walkthrough demonstrates the Zabbix server detecting sustained CPU
+pressure on a Linux virtual machine using idle-based monitoring. The video
+shows baseline conditions, sustained load introduction, trigger activation
+after the defined rolling window, visual confirmation via graphs, and
+automatic alert resolution once CPU pressure subsides.
+Automated remediation behavior is documented separately and was not executed during this demo to avoid disruptive actions in a demonstration environment.
+
